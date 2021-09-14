@@ -68,6 +68,12 @@ const TABLE_COLUMNS = [
     headerName: 'Percent',
     width: 160,
     headerAlign: 'center',
+    // added section below to display the data as a percentage
+    // found code for this at https://material-ui.com/components/data-grid/columns/
+    valueFormatter: (params) => {
+      const valueFormatted = Number(params.value * 100).toLocaleString();
+      return `${valueFormatted} %`;
+    },
   },
   {
     field: 'density',
