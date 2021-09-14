@@ -5,12 +5,20 @@ import axios from 'axios';
 // UI Components
 import { DataGrid } from '@material-ui/data-grid';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles'; // used in changing the theme for the App Bar
 
 // Images
 import LexcelonLogo from './images/LexcelonLogo.png';
 
 // Constants
 const LEXCELON_GREEN = '#598d36';
+const theme = createTheme({ // Created a new theme to hold the Lexcelon Green constant
+  palette: {
+    secondary: {
+      main: LEXCELON_GREEN
+    }
+  }
+});
 const TABLE_PAGE_SIZE = 5;
 const TABLE_COLUMNS = [
   { field: 'id',
@@ -96,10 +104,15 @@ export default class App extends Component {
     return (
       <>
         {/* App Bar */}
-        <AppBar position='static'>
-          <Toolbar>
-          </Toolbar>
-        </AppBar>
+        {/* Changed theme to new one created above so secondary color is Lexcelon Green */}
+        <MuiThemeProvider theme={theme}>
+          <AppBar position='static' color="secondary" >
+            <Toolbar>
+              {/* adds the logo to the App Bar */}
+              <img src={LexcelonLogo} alt="Lexcelon Logo" width="150" height="70" />
+            </Toolbar>
+          </AppBar>
+        </MuiThemeProvider>
 
         {/* Table */}
         <Typography variant='h1' style={{ fontSize: 50, textAlign: 'center', marginTop: '25px', marginBottom: '15px' }}>States</Typography>
